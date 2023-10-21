@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment</title>
+    <script>
+function addTask() {
+  var task_input = document.getElementById("input");
+  var priority = document.getElementById("priority");
+  var task_list = document.getElementById("list");
+  
+  var task_text = task_input.value;
+  var taskPriority = priority.value;
+  
+  if (task_text.trim() === "") {
+    alert("Please enter a task.");
+    return;
+  }
+  if (taskPriority == "") {
+    alert("Please select a priority.");
+  }
+  
+  var list = document.createElement("li");
+  
+  var checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  
+  var task_text_span = document.createElement("span");
+  task_text_span.textContent = task_text;
+  
+  var deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.onclick = function() {
+    list.remove();
+  };
+  
+  var prioritySpan = document.createElement("span");
+  prioritySpan.textContent = "PRIORITY: " + taskPriority;
+  
+  checkbox.addEventListener("change", function() {
+    if (checkbox.checked) {
+      list.style.textDecoration = "line-through";
+      list.style.color = "gray";
+    } else {
+      list.style.textDecoration = "none";
+      list.style.color = "inherit";
+    }
+  });
+
+  list.appendChild(checkbox);
+  list.appendChild(task_text_span);
+  list.appendChild(prioritySpan);
+  list.appendChild(deleteButton);
+  
+  task_list.appendChild(list);
+  
+  task_input.value = "";
+}
+    </script>
+    <style>
+       div {
+        height: 700px;
+        width: 600px;
+        border: 1px solid black;
+        background-color: lightgrey;
+        margin: auto;
+       } 
+       h2 {
+        margin:5px auto;
+        width: 320px;
+        background-color: cyan;
+        padding: 5px 55px;
+       }
+       .text_box {
+        margin:10px;
+        height: 30px;
+        width: 300px;
+        font-size: 16px;
+        font-weight: bold;
+        color: red;
+       }
+       select {
+        margin: 5px;
+        width: 120px;
+        height: 30px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: red;
+        color: white;
+       }
+       button {
+        margin: 5px;
+        width: 100px;
+        height: 30px;
+        font-weight: bold;
+        font-size: bold;
+        background-color: greenyellow;
+       }
+       span {
+        font-size: 18px;
+        margin: 5px;
+       }
+    </style>
+</head>
+<body>
+<div>
+  <h2>An overview of task scheduling</h2>
+    <input type="text" class="text_box" id="input" placeholder="Enter the tasks here...">
+    <select id="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <button onclick="addTask()" class="button">Add Task</button>
+    <ul id="list"></ul>
+</div>
+</body>
+</html>
